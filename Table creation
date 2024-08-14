@@ -1,1 +1,45 @@
+CREATE TABLE Customers (
+    customer_id INT PRIMARY KEY,
+    name VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
+    location VARCHAR(255)
+);
 
+CREATE TABLE Products (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(255) NOT NULL,
+    brand VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    category VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Feedback (
+    feedback_id INT PRIMARY KEY,
+    customer_id INT,
+    product_id INT,
+    rating VARCHAR(10), -- Simple textual rating
+    comments VARCHAR(255), -- Shorter text for comments
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    FOREIGN KEY (product_id) REFERENCES Products(product_id)
+);
+
+
+CREATE TABLE Sales (
+    sale_id INT PRIMARY KEY,
+    product_id INT,
+    store_id INT,
+    customer_id INT,
+    quantity INT,
+    sale_date DATE,
+    FOREIGN KEY (product_id) REFERENCES Products(product_id),
+    FOREIGN KEY (store_id) REFERENCES Stores(store_id),
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+);
+
+CREATE TABLE Stores (
+    store_id INT PRIMARY KEY,
+    store_name VARCHAR(255) NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    store_manager VARCHAR(255) NOT NULL,
+    contact_number VARCHAR(20) NOT NULL
+);
