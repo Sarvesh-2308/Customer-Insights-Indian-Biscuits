@@ -1,5 +1,5 @@
-create database Customer;
-use Customer;
+create database toy;
+use toy;
 CREATE TABLE Customers (
     customer_id INT PRIMARY KEY,
     name VARCHAR(255),
@@ -9,8 +9,10 @@ CREATE TABLE Customers (
 
 CREATE TABLE Products (
     product_id INT PRIMARY KEY,
-    product_name VARCHAR(255),
-    brand VARCHAR(255)
+    product_name VARCHAR(255) NOT NULL,
+    brand VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    category VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Feedback (
@@ -38,8 +40,10 @@ CREATE TABLE Sales (
 
 CREATE TABLE Stores (
     store_id INT PRIMARY KEY,
-    store_name VARCHAR(255),
-    location VARCHAR(255)
+    store_name VARCHAR(255) NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    store_manager VARCHAR(255) NOT NULL,
+    contact_number VARCHAR(20) NOT NULL
 );
 
 
@@ -64,51 +68,53 @@ INSERT INTO Customers (customer_id, name, email, location) VALUES
 (18, 'Vikas Agarwal', 'vikas.agarwal@example.com', 'Gurgaon'),
 (19, 'Meena Rao', 'meena.rao@example.com', 'Nagpur'),
 (20, 'Manoj Patil', 'manoj.patil@example.com', 'Nashik');
- 
- 
- 
- INSERT INTO Products (product_id, product_name, brand) VALUES 
-(1, 'Good Day Biscuits', 'Britannia'),
-(2, 'Parle-G Biscuits', 'Parle'),
-(3, 'Marie Gold', 'Britannia'),
-(4, 'Hide & Seek', 'Parle'),
-(5, 'Oreo', 'Cadbury'),
-(6, 'Sunfeast Dark Fantasy', 'ITC'),
-(7, 'Bourbon', 'Britannia'),
-(8, 'Oreo', 'Cadbury'), 
-(9, 'Jim Jam', 'Britannia'),
-(10, 'Milk Bikis', 'Britannia');
-UPDATE products
-SET product_name = 'Milano', brand = 'Parle'
-WHERE product_name = 'Oreo' AND brand = 'Cadbury';
-UPDATE products
-SET product_name = 'Oreo', brand = 'Cadbury'
-WHERE product_id = 8;
+
+INSERT INTO Products (product_id, product_name, brand, price, category) VALUES
+(1, 'Marie Gold', 'Britannia', 10.00, 'Biscuits'),
+(2, 'Good Day', 'Britannia', 20.00, 'Biscuits'),
+(3, 'Parle-G', 'Parle', 5.00, 'Biscuits'),
+(4, 'Hide & Seek', 'Parle', 30.00, 'Biscuits'),
+(5, 'Bourbon', 'Britannia', 25.00, 'Biscuits'),
+(6, 'Jim Jam', 'Britannia', 20.00, 'Biscuits'),
+(7, '50-50', 'Britannia', 15.00, 'Biscuits'),
+(8, 'Krackjack', 'Parle', 15.00, 'Biscuits'),
+(9, 'Monaco', 'Parle', 10.00, 'Biscuits'),
+(10, 'Nice Time', 'Britannia', 20.00, 'Biscuits'),
+(11, 'Digestive', 'McVitie\'s', 50.00, 'Biscuits'),
+(12, 'Milk Bikis', 'Britannia', 25.00, 'Biscuits'),
+(13, 'Oreo', 'Cadbury', 30.00, 'Biscuits'),
+(14, 'Dark Fantasy', 'Sunfeast', 40.00, 'Biscuits'),
+(15, 'Choco Fills', 'Sunfeast', 35.00, 'Biscuits'),
+(16, 'NutriChoice', 'Britannia', 45.00, 'Biscuits'),
+(17, 'Marie Light', 'Sunfeast', 12.00, 'Biscuits'),
+(18, 'Little Hearts', 'Britannia', 15.00, 'Biscuits'),
+(19, 'Pure Magic', 'Sunfeast', 50.00, 'Biscuits'),
+(20, 'Treat', 'Britannia', 20.00, 'Biscuits');
 
 
+INSERT INTO Feedback (feedback_id, customer_id, product_id, rating, comments) VALUES
+(1, 1, 1, '5 stars', 'Excellent biscuits, very fresh!'),
+(2, 2, 2, '4 stars', 'Good taste, but a bit too sweet.'),
+(3, 3, 3, '3 stars', 'Average biscuits, nothing special.'),
+(4, 4, 4, '5 stars', 'Love the chocolate chips, very tasty.'),
+(5, 5, 5, '2 stars', 'Too sweet for my taste.'),
+(6, 6, 6, '4 stars', 'Very good biscuits, but a little pricey.'),
+(7, 7, 7, '5 stars', 'Great value for the price.'),
+(8, 8, 8, '3 stars', 'Decent biscuits, could use more flavor.'),
+(9, 9, 9, '4 stars', 'Good texture and taste.'),
+(10, 10, 10, '5 stars', 'Perfect biscuits for tea time.'),
+(11, 11, 11, '4 stars', 'Classic and reliable, but a bit expensive.'),
+(12, 12, 12, '5 stars', 'Always a favorite, very crunchy.'),
+(13, 13, 13, '5 stars', 'Best biscuits I have ever tasted.'),
+(14, 14, 14, '4 stars', 'Rich flavor, but a little too costly.'),
+(15, 15, 15, '4 stars', 'Delicious with a hint of chocolate.'),
+(16, 16, 16, '5 stars', 'Healthy and tasty, will buy again.'),
+(17, 17, 17, '3 stars', 'Okay, but not as good as others.'),
+(18, 18, 18, '4 stars', 'Nice for snacking, good taste.'),
+(19, 19, 19, '5 stars', 'Absolutely amazing, worth the price.'),
+(20, 20, 20, '4 stars', 'Good quality biscuits, enjoyed the taste.');
 
 
- INSERT INTO Feedback (feedback_id, customer_id, product_id, rating, comments) VALUES
-(1, 1, 1, 'Good', 'Tasty and crispy!'),
-(2, 2, 2, 'Excellent', 'Always a favorite.'),
-(3, 3, 3, 'Average', 'Not as good as before.'),
-(4, 4, 4, 'Good', 'Nice chocolate flavor.'),
-(5, 5, 5, 'Excellent', 'Loved the cream.'),
-(6, 6, 6, 'Good', 'Great taste, but a bit pricey.'),
-(7, 7, 7, 'Average', 'Decent for the price.'),
-(8, 8, 8, 'Good', 'Kids love it!'),
-(9, 9, 9, 'Good', 'Classic choice.'),
-(10, 10, 10, 'Excellent', 'Perfect with milk.'),
-(11, 11, 1, 'Average', 'Could be better.'),
-(12, 12, 2, 'Good', 'Always a reliable choice.'),
-(13, 13, 3, 'Excellent', 'Great for tea time.'),
-(14, 14, 4, 'Good', 'Crunchy and tasty.'),
-(15, 15, 5, 'Average', 'Not as creamy as expected.'),
-(16, 16, 6, 'Excellent', 'Rich and delicious.'),
-(17, 17, 7, 'Good', 'A good classic option.'),
-(18, 18, 8, 'Excellent', 'Love the flavor.'),
-(19, 19, 9, 'Good', 'A childhood favorite.'),
-(20, 20, 10, 'Good', 'Perfect for kids.');
 
 INSERT INTO Sales (sale_id, product_id, store_id, customer_id, quantity, sale_date) VALUES
 (1, 1, 1, 1, 2, '2024-07-01'),
@@ -132,17 +138,28 @@ INSERT INTO Sales (sale_id, product_id, store_id, customer_id, quantity, sale_da
 (19, 9, 9, 19, 5, '2024-07-19'),
 (20, 10, 10, 20, 2, '2024-07-20');
 
-INSERT INTO Stores (store_id, store_name, location) VALUES
-(1, 'Fresh Mart', 'Mumbai'),
-(2, 'Daily Needs', 'Delhi'),
-(3, 'Super Bazaar', 'Pune'),
-(4, 'City Market', 'Bangalore'),
-(5, 'Quick Shop', 'Hyderabad'),
-(6, 'Mega Mart', 'Chennai'),
-(7, 'Easy Day', 'Kolkata'),
-(8, 'Hyper Market', 'Ahmedabad'),
-(9, 'Smart Store', 'Jaipur'),
-(10, 'Value Mart', 'Kochi');
+INSERT INTO Stores (store_id, store_name, location, store_manager, contact_number) VALUES
+(1, 'Big Bazaar', 'Mumbai', 'Ravi Kumar', '022-12345678'),
+(2, 'Reliance Fresh', 'Delhi', 'Amit Sharma', '011-87654321'),
+(3, 'More Supermarket', 'Bengaluru', 'Sita Rao', '080-23456789'),
+(4, 'Spencer’s', 'Chennai', 'Vijay Singh', '044-34567890'),
+(5, 'D-Mart', 'Hyderabad', 'Priya Gupta', '040-45678901'),
+(6, 'Star Bazaar', 'Kolkata', 'Ravi Patel', '033-56789012'),
+(7, 'Nature’s Basket', 'Pune', 'Anita Deshmukh', '020-67890123'),
+(8, 'Food Bazaar', 'Jaipur', 'Rajesh Mehta', '0141-78901234'),
+(9, 'HyperCity', 'Ahmedabad', 'Nisha Jain', '079-89012345'),
+(10, 'V-Mart', 'Chandigarh', 'Gaurav Choudhury', '0172-90123456'),
+(11, 'Reliance Trends', 'Surat', 'Neha Kapoor', '0261-01234567'),
+(12, 'Central', 'Indore', 'Manoj Sharma', '0731-12345678'),
+(13, 'Pantaloons', 'Lucknow', 'Sanjay Yadav', '0522-23456789'),
+(14, 'Easyday', 'Nagpur', 'Suman Rani', '0712-34567890'),
+(15, 'Brand Factory', 'Coimbatore', 'Karthik Ramesh', '0422-45678901'),
+(16, 'Shoppers Stop', 'Vadodara', 'Pooja Patel', '0265-56789012'),
+(17, 'Lifestyle', 'Bhubaneswar', 'Subhas Chandra', '0674-67890123'),
+(18, 'Inorbit Mall', 'Mangalore', 'Shruti Shetty', '0824-78901234'),
+(19, 'The Oberoi Mall', 'Thane', 'Ashok Kumar', '022-89012345'),
+(20, 'City Centre', 'Patna', 'Rita Kumari', '0612-90123456');
+
 
  desc customers;
  desc products;
@@ -151,7 +168,7 @@ INSERT INTO Stores (store_id, store_name, location) VALUES
  desc stores;
 
 select *from customers;
-select *from products;
+select  *from products;
 select *from feedback; 
 select *from sales;
  select *from stores;
@@ -160,21 +177,31 @@ select *from sales;
  
 -- SUBQUERIES 
 
--- 1. What feedback have we received for the product with product_id = 5?
+-- 1. What comments and rating  have we received for the product with product_id = 5?
+
 SELECT comments, rating
 FROM Feedback
-WHERE product_id = 5;
+WHERE product_id = (
+    SELECT product_id
+    FROM Products
+    WHERE product_id = 5
+);
 
--- 2. Get the names of customers who purchased products from 'Fresh Mart'
+ 
+
+-- 2. Get the names of customers who purchased products from 'Big Bazaar'
 SELECT name 
 FROM Customers 
 WHERE customer_id IN (
     SELECT customer_id 
     FROM Sales 
-    WHERE store_id = (SELECT store_id FROM Stores WHERE store_name = 'Fresh Mart')
+    WHERE store_id = (SELECT store_id FROM Stores WHERE store_name = 'Big Bazaar')
 );
 
--- 3.Identify the locations of stores that have sold products rated 'Good' by customers.
+
+
+-- 3.Identify the locations of stores that have sold products rated '4 stars' by customers.
+
 SELECT location 
 FROM Stores 
 WHERE store_id IN (
@@ -183,17 +210,20 @@ WHERE store_id IN (
     WHERE product_id IN (
         SELECT product_id 
         FROM Feedback 
-        WHERE rating = 'Good'
-    )
-);
--- 4.Retrieve the store names where customer 'Sneha Reddy' made purchases
-SELECT store_name 
+        WHERE rating = '4 stars'
+    ));
+    
+
+-- 4.Retrieve the store names & store_manager where customer 'Sneha Reddy' made purchases
+SELECT store_name ,store_manager
 FROM Stores 
 WHERE store_id IN (
     SELECT store_id 
     FROM Sales 
     WHERE customer_id = (SELECT customer_id FROM Customers WHERE name = 'Sneha Reddy')
 );
+
+
 
 -- JOINS 
 
@@ -210,18 +240,16 @@ FROM
     Sales
 LEFT JOIN 
     Stores ON Sales.store_id = Stores.store_id;
+
+
     
-    -- 2.Determine the possible combinations of customers and products
-    SELECT 
-    Customers.customer_id, 
-    Customers.name AS customer_name, 
-    Products.product_id, 
-    Products.product_name
-FROM 
-    Customers
-CROSS JOIN 
-    Products;
-    
+   -- 2. List all possible combinations of products and feedback ratings:
+    SELECT Products.product_name, Feedback.rating
+FROM Products
+CROSS JOIN Feedback;
+
+
+
     
     -- 3. List of Customers with Their Feedback on Products
     SELECT 
@@ -235,37 +263,49 @@ JOIN
 JOIN 
     Products ON Feedback.product_id = Products.product_id;
     
+    
+    
+    
     -- 4. Show the total quantity sold per store, including stores with no sales.
 
-   SELECT Stores.store_id, Stores.store_name, Stores.location, SUM(Sales.quantity) AS total_quantity_sold
+   SELECT Stores.store_id, Stores.store_name, Stores.location,
+   SUM(Sales.quantity) AS total_quantity_sold
 FROM Sales
 RIGHT JOIN Stores ON Sales.store_id = Stores.store_id
 GROUP BY Stores.store_id, Stores.store_name, Stores.location;
 
 	
     -- VIEWS
-    CREATE VIEW SalesView AS
-SELECT 
-    sale_id, 
-    product_id, 
-    store_id, 
-    customer_id, 
-    quantity, 
-    sale_date
-FROM 
-    Sales;
+    CREATE VIEW BasicCustomerFeedback AS
+SELECT
+    c.name AS customer_name,
+    p.product_name,
+    p.brand AS product_brand,
+    f.rating AS feedback_rating,
+    f.comments AS feedback_comments
+FROM
+    Feedback f
+    JOIN Customers c ON f.customer_id = c.customer_id
+    JOIN Products p ON f.product_id = p.product_id;
     
-    select *from salesview;
     
-    CREATE VIEW storeView AS
-SELECT 
-    store_id, 
-    store_name, 
-    location
-FROM 
-    Stores;
-    select *from storeview;
-
+    select *from BasicCustomerFeedback;
+    
+    
+CREATE VIEW StoreSalesSummary AS
+SELECT
+    s.store_name,
+    s.location AS store_location,
+    sal.sale_id,
+    sal.product_id,
+    sal.customer_id,
+    sal.quantity,
+    sal.sale_date
+FROM
+    Sales sal
+    JOIN Stores s ON sal.store_id = s.store_id;
+    
+    select *from StoreSalesSummary;
 
 
 
